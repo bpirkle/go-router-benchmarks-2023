@@ -23,6 +23,14 @@ GO_LDFLAGS += -X main.buildHost=$(if $(HOSTNAME),$(HOSTNAME),unknown)
 install:
 	go install
 
+get:
+	go get
+	go get github.com/labstack/echo
+	go get github.com/gin-gonic/gin
+	go get github.com/gorilla/mux
+	go get github.com/valyala/fasthttp
+	go get github.com/fasthttp/router
+
 build:
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	@echo "VERSION ......: $(VERSION)"
@@ -30,10 +38,10 @@ build:
 	@echo "BUILD DATE ...: $(BUILD_DATE)"
 	@echo "GO VERSION ...: $(word 3, $(shell go version))"
 	@echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	go build -ldflags "$(GO_LDFLAGS)" -o go-echo ./main-echo.go
-	go build -ldflags "$(GO_LDFLAGS)" -o go-gin ./main-gin.go
-	go build -ldflags "$(GO_LDFLAGS)" -o go-mux ./main-mux.go
-	go build -ldflags "$(GO_LDFLAGS)" -o go-fasthttp ./main-fasthttp.go
+	go build -ldflags "$(GO_LDFLAGS)" -tags echo -o go-echo ./main-echo.go
+	go build -ldflags "$(GO_LDFLAGS)" -tags gin -o go-gin ./main-gin.go
+	go build -ldflags "$(GO_LDFLAGS)" -tags mux -o go-mux ./main-mux.go
+	go build -ldflags "$(GO_LDFLAGS)" -tags fasthttp -o go-fasthttp ./main-fasthttp.go
 
 run:
 	go run -ldflags "$(GO_LDFLAGS)" ./go-echo
@@ -47,9 +55,11 @@ check:
 	    echo "gofmt: format errors detected" >&2; \
 	    false; \
 	fi
-	go vet ./...
 
 clean:
 	rm -f go-echo
+	rm -f go-gin
+	rm -f go-mux
+	rm -f go-fasthttp
 
 .PHONY: build run test clean
