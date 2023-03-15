@@ -42,6 +42,7 @@ build:
 	go build -ldflags "$(GO_LDFLAGS)" -tags gin -o go-gin ./main-gin.go
 	go build -ldflags "$(GO_LDFLAGS)" -tags mux -o go-mux ./main-mux.go
 	go build -ldflags "$(GO_LDFLAGS)" -tags fasthttp -o go-fasthttp ./main-fasthttp.go
+	go build -ldflags "$(GO_LDFLAGS)" -tags http -o go-http ./main-http.go
 
 run:
 	go run -ldflags "$(GO_LDFLAGS)" ./go-echo
@@ -61,5 +62,6 @@ clean:
 	rm -f go-gin
 	rm -f go-mux
 	rm -f go-fasthttp
+	rm -f go-http
 
 .PHONY: build run test clean

@@ -17,7 +17,7 @@ make get
 make build
 ```
 
-These step install dependencies then build the four binaries.
+These step install dependencies then build the binaries.
 
 If you prefer, you can also issue all the commands yourself. See the Makefile for the necessary formats, including build tags.
 ## Benchmarking
@@ -25,3 +25,9 @@ If you prefer, you can also issue all the commands yourself. See the Makefile fo
 Wouldn't it be neat if this was written. I should do that.
 
 The idea is that the Makefile will execute the benchmarking by starting each binary, issuing a number of requests, and then stopping the binary. I am planning to use "wrk" to do the actual benchmarking, so I will need to explain how to obtain that, and figure out how to integrate that into the makefile.
+
+What I am doing so far is manually running https://github.com/wg/wrk from the command line like this:
+
+```sh-session
+./wrk -d 100s -c 1024 -t 8 http://localhost:8080/
+```

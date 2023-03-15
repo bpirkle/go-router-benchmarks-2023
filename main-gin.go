@@ -12,7 +12,7 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "mux")
+	fmt.Fprintf(w, "gin")
 }
 
 func Exit(w http.ResponseWriter, r *http.Request) {
@@ -20,7 +20,8 @@ func Exit(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	router := gin.Default()
+	gin.SetMode(gin.ReleaseMode)
+	router := gin.New()
 
 	router.GET("/", gin.WrapF(Index))
 	router.GET("/exit", gin.WrapF(Exit))
