@@ -1,5 +1,6 @@
 go-echo
 go-fasthttp
+go-fasthttpadaptor
 go-gin
 go-mux
 go-http
